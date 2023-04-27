@@ -15,6 +15,25 @@ export default {
                 alert(error);
             });
     },
+    register: ({ commit }, user) => {
+        console.log(user);
+        
+        const { password, confirmPassword } = user;
+
+        if (password !== confirmPassword) {
+            return alert('Password Does Not Match!');
+        }
+
+        axios
+            .post(`${SERVER_ADDRESS}/user/register/`, user)
+            .then(({ data: { message } }) => {
+                alert(message);
+                window.location.href = '/login';
+            })
+            .catch(error => {
+                alert(error)
+            });
+    },
     loginWithJWT: ({ commit }) => {
         const access = localStorage.getItem('jwt');
         if (!access) return;
