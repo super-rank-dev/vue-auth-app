@@ -15,7 +15,7 @@ import store from './vuex'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/home', component: Home },
+        { path: '/', component: Home },
         { path: '/about', component: About },
         { path: '/login', component: Login },
         { path: '/register', component: Register }

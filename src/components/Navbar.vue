@@ -6,8 +6,9 @@ export default {
     setup() {
         const store = useStore();
         return {
-            user: store.state.auth.user,
-            isAuthorized: computed(() => store.getters['auth/isAuthorized'])
+            user: computed(() => store.state.auth.user),
+            isAuthorized: computed(() => store.getters['auth/isAuthorized']),
+            logoutUser: () => store.dispatch('auth/logout')
         }
     }
 }
@@ -26,10 +27,10 @@ export default {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto" v-if="isAuthorized">
                     <li class="nav-item">
-                        <router-link class="nav-link active" to="/home">{{ user }}</router-link>
+                        <router-link class="nav-link active" to="/home">{{ user.email }}</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/">Sign out</router-link>
+                        <router-link class="nav-link" to="/login" @click="logoutUser">Sign out</router-link>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto" v-else>
